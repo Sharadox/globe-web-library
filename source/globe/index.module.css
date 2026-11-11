@@ -1,0 +1,37 @@
+/* The globe fills its positioned parent. Colours follow the page through --globe-glow and --globe-surface. */
+.globe {
+  --globe-glow: currentColor;
+  --globe-surface: Canvas;
+  position: absolute;
+  inset: 0;
+}
+.globe canvas {
+  display: block;
+  touch-action: pan-y;
+}
+.halo {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--globe-glow) 14%, transparent),
+    color-mix(in srgb, var(--globe-glow) 4%, transparent) 60%,
+    transparent
+  );
+  filter: blur(30px);
+  pointer-events: none;
+}
+.fallback {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--globe-glow) 10%, var(--globe-surface)),
+    var(--globe-surface) 70%
+  );
+  box-shadow:
+    0 0 120px 10px color-mix(in srgb, var(--globe-glow) 8%, transparent),
+    inset 0 0 40px color-mix(in srgb, var(--globe-glow) 8%, transparent);
+}

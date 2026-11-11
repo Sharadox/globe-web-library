@@ -1,0 +1,10 @@
+# @sharadox/globe-web-library
+
+> Interactive 3D dot globe for React (three.js + @react-three/fiber), client-only.
+
+- /globe: <Globe palette={{ ink, body, rim, dark }} home={{ latitude, longitude }} destinations={[...]} landPoints="/globe/land.bin" label className /> — fills positioned parent; load with next/dynamic ssr:false
+- Generate land dots: `globe-land-points public/globe/land.bin` (bin) or landPoints(topology, samples=42000, southernLimit=-60)
+- /drag-controller createDragController(initial, autoRotate) (pure); /globe-drag useGlobeDrag; /land-points useLandPoints(url)
+- /world <World> scene for custom Canvas; /color globeColors(palette)
+- CSS vars: --globe-glow, --globe-surface
+- Peer: react, react-dom. Licence: Sharadox Open Source Licence 0.1.0
