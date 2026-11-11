@@ -1,4 +1,4 @@
-/** Arcs: a faint path plus a bright pulse travelling along it. */
+/** Arcs: a faint path plus a bright pulse traveling along it. */
 export const ARC_SHADER = {
   vertex: /* glsl */ `
     varying float alongArc;

@@ -5,7 +5,7 @@ An interactive 3D dot globe for React websites, built on three.js:
 - **Land:** twinkling dots that fade towards the edge.
 - **Arcs:** a pulse travels from your home to each destination, and a marker with a pulsing ring sits at home.
 - **Motion:** drag to spin with inertia, a slow auto-rotation that eases back in, and a small tilt towards the pointer.
-- **Colours:** they come from your page, so a dark style draws white light and a light style draws dark ink.
+- **Colors:** they come from your page, so a dark style draws white light and a light style draws dark ink.
 - **Performance and fallbacks:** it pauses while off screen, shows a static sphere without WebGL, and stops auto-rotating for reduced motion.
 
 It also ships `globe-land-points`, which generates the land dots file from Natural Earth data.
@@ -56,6 +56,6 @@ The globe fills its positioned parent. Its halo and fallback follow `--globe-glo
 
 Tests replace the three.js renderer with a stand-in and run every frame callback by hand. `pnpm verify` runs formatting, lint, type-check, tests with 100% coverage and the build. Branches follow `<feature>.development` → `development` → `index`, and releases are `v<version>` tags on `index`.
 
-## Licence
+## License
 
 Licença Sharadox de Código Aberto, versão 0.1.0. See [português](LICENCA.md) (the binding text) and the [English translation](LICENSE.md).

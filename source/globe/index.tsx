@@ -12,7 +12,7 @@ import styles from "./index.module.css";
 import type { GlobeProperties } from "@sharadox/globe-web-library/globe/type";
 
 /**
- * An interactive 3D dot globe: land as twinkling dots, arcs with travelling pulses from home to each destination,
+ * An interactive 3D dot globe: land as twinkling dots, arcs with traveling pulses from home to each destination,
  * markers, a soft halo, drag to spin with inertia and a slow auto-rotation (off with reduced motion). It pauses
  * when off screen and shows a static sphere without WebGL. Client only: load it with `next/dynamic` and `ssr: false`.
  *

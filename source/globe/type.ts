@@ -2,7 +2,7 @@ import type { GlobePalette } from "@sharadox/globe-web-library/color/type";
 import type { Place } from "@sharadox/globe-web-library/place/type";
 
 export interface GlobeProperties {
-  /** Colours (hex) and whether the background is dark; pass new ones when the page's style changes. */
+  /** Colors (hex) and whether the background is dark; pass new ones when the page's style changes. */
   palette: GlobePalette;
   /** Where arcs start and the globe first faces. */
   home: Place;

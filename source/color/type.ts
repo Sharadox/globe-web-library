@@ -1,4 +1,4 @@
-/** The globe's colours, channels from 0 to 1 (as shaders take them). */
+/** The globe's colors, channels from 0 to 1 (as shaders take them). */
 export interface GlobeColors {
   /** Land dots, arcs and markers. */
   ink: [number, number, number];
@@ -11,7 +11,7 @@ export interface GlobeColors {
   additive: boolean;
 }
 
-/** Colours as a site writes them: "#rrggbb" values and whether the background is dark. */
+/** Colors as a site writes them: "#rrggbb" values and whether the background is dark. */
 export interface GlobePalette {
   ink: string;
   body: string;

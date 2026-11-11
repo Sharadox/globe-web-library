@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { globeColors } from "@sharadox/globe-web-library/color";
 
-test("turns hex colours into shader channels", () => {
+test("turns hex colors into shader channels", () => {
   expect(globeColors({ ink: "#ffffff", body: "#000000", rim: "#ff0000", dark: true })).toEqual({
     ink: [1, 1, 1],
     inkHex: "#ffffff",

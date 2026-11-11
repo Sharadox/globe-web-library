@@ -1,4 +1,4 @@
-/* The globe fills its positioned parent. Colours follow the page through --globe-glow and --globe-surface. */
+/* The globe fills its positioned parent. Colors follow the page through --globe-glow and --globe-surface. */
 .globe {
   --globe-glow: currentColor;
   --globe-surface: Canvas;
