@@ -1,7 +1,7 @@
 {
   "name": "@sharadox/globe-web-library",
-  "version": "0.1.0",
-  "description": "An interactive 3D dot globe for React (three.js): land dots, arcs with travelling pulses, markers, drag with inertia, auto-rotation, colours from the page, plus the land dots generator.",
+  "version": "0.1.1",
+  "description": "An interactive 3D dot globe for React (three.js): land dots, arcs with traveling pulses, markers, drag with inertia, auto-rotation, colors from the page, plus the land dots generator.",
   "private": false,
   "license": "SEE LICENSE IN LICENCA.md",
   "author": "Sharadox <contact@sharadox.com>",
@@ -31,7 +31,7 @@
     "**/*.css"
   ],
   "engines": {
-    "node": ">=24"
+    "node": ">=26"
   },
   "packageManager": "pnpm@10.34.9",
   "publishConfig": {

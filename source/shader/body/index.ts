@@ -1,6 +1,6 @@
 import { GLOW_VERTEX } from "@sharadox/globe-web-library/shader/glow-vertex";
 
-/** The planet body with a fresnel rim, in the style's colours. */
+/** The planet body with a fresnel rim, in the style's colors. */
 export const BODY_SHADER = {
   vertex: GLOW_VERTEX,
   fragment: /* glsl */ `
