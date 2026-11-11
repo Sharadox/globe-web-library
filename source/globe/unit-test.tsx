@@ -5,6 +5,7 @@ import { afterEach, beforeEach, expect, test, vi } from "vitest";
 vi.mock("@react-three/fiber", () => import("@sharadox/globe-web-library/test-fixture/three-fiber"));
 vi.mock("@sharadox/globe-web-library/web-gl-support", () => ({ supportsWebGl: vi.fn(() => true) }));
 const { Globe } = await import("@sharadox/globe-web-library/globe");
+const { Canvas } = await import("@sharadox/globe-web-library/test-fixture/three-fiber");
 const { supportsWebGl } = await import("@sharadox/globe-web-library/web-gl-support");
 
 let visibility: (entries: { isIntersecting: boolean }[]) => void = () => {};
@@ -38,6 +39,8 @@ test("draws the globe once the land dots arrive, and pauses off screen", async (
   );
   expect(container.firstElementChild!.className).toContain("hero");
   await waitFor(() => getByTestId("canvas"));
+  // Sized by layout, not by transforms, so an entrance scale animation never leaves it the wrong size.
+  expect(vi.mocked(Canvas).mock.calls.at(-1)![0]).toMatchObject({ resize: { offsetSize: true } });
   act(() => visibility([{ isIntersecting: false }]));
   act(() => visibility([]));
   unmount();

@@ -49,6 +49,9 @@ export function Globe({
       <div className={styles.halo} aria-hidden />
       {webGl && data ? (
         <Canvas
+          // Measured without CSS transforms: a parent that scales in (an entrance animation) would otherwise fix the
+          // canvas at the scaled-down size until the next resize or scroll, and the globe would jump later.
+          resize={{ offsetSize: true }}
           dpr={[1, 2]}
           camera={{ position: [0, 0, 3.7], fov: 38 }}
           gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
