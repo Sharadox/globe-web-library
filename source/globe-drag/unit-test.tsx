@@ -42,11 +42,13 @@ test("a globe mounted by a soft navigation carries on from the last one's rotati
   const first = controllers.at(-1)!;
   first.down(0, 0);
   first.move({ clientX: 80, clientY: 0, bounds: { left: 0, top: 0, width: 100, height: 100 } });
+  first.step(0.016);
   const where = first.rotation();
-  unmount();
+  // The new globe is built while the old one is still there, as when a page is rebuilt in place.
   beginSoftNavigation();
   render(<Surface />);
   expect(controllers.at(-1)!.rotation()).toEqual(where);
+  unmount();
   beginSoftNavigation(0);
   render(<Surface />);
   expect(controllers.at(-1)!.rotation()).toEqual({ x: 0, y: 0 });
