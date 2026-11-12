@@ -4,7 +4,10 @@ import { isSoftNavigation } from "@sharadox/web-library/navigation/soft-navigati
 import { createDragController } from "@sharadox/globe-web-library/drag-controller";
 import type { GlobeDragController, GlobeRotation } from "@sharadox/globe-web-library/drag-controller/type";
 
-/** The rotation of the last globe that unmounted, so a page rebuilt in place continues from it. */
+/**
+ * The latest rotation of any globe, kept every frame: a page rebuilt in place builds its new globe before the old
+ * one is gone, so saving only on unmount would hand over a stale rotation.
+ */
 let remembered: GlobeRotation | null = null;
 
 /**
@@ -15,10 +18,16 @@ let remembered: GlobeRotation | null = null;
  */
 export function useGlobeDrag(initial: GlobeRotation, autoRotate: boolean) {
   const target = useRef<HTMLDivElement>(null);
-  const [controller] = useState(() =>
-    createDragController(isSoftNavigation() && remembered ? remembered : initial, autoRotate),
-  );
-  useEffect(() => () => void (remembered = controller.rotation()), [controller]);
+  const [controller] = useState(() => {
+    const created = createDragController(isSoftNavigation() && remembered ? remembered : initial, autoRotate);
+    const step = created.step;
+    created.step = (deltaSeconds) => {
+      const target = step(deltaSeconds);
+      remembered = created.rotation();
+      return target;
+    };
+    return created;
+  });
   useEffect(() => {
     const element = target.current;
     if (!element) return;
