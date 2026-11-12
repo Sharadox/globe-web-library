@@ -61,5 +61,8 @@ export function createDragController(initial: GlobeRotation, autoRotate: boolean
       }
       return { x: rotationX + tiltX, y: rotationY + tiltY };
     },
+    rotation() {
+      return { x: rotationX, y: rotationY };
+    },
   };
 }

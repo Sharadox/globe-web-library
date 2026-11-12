@@ -1,15 +1,24 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { isSoftNavigation } from "@sharadox/web-library/navigation/soft-navigation";
 import { createDragController } from "@sharadox/globe-web-library/drag-controller";
 import type { GlobeDragController, GlobeRotation } from "@sharadox/globe-web-library/drag-controller/type";
 
+/** The rotation of the last globe that unmounted, so a page rebuilt in place continues from it. */
+let remembered: GlobeRotation | null = null;
+
 /**
  * Connects the drag controller to an element's pointer events (with pointer capture and grab cursors). Attach the
- * returned reference to the element that receives the pointer; step the controller every frame.
+ * returned reference to the element that receives the pointer; step the controller every frame. When the page is
+ * rebuilt in place (a soft navigation, such as switching language), the globe carries on from the rotation the
+ * previous one had.
  */
 export function useGlobeDrag(initial: GlobeRotation, autoRotate: boolean) {
   const target = useRef<HTMLDivElement>(null);
-  const [controller] = useState(() => createDragController(initial, autoRotate));
+  const [controller] = useState(() =>
+    createDragController(isSoftNavigation() && remembered ? remembered : initial, autoRotate),
+  );
+  useEffect(() => () => void (remembered = controller.rotation()), [controller]);
   useEffect(() => {
     const element = target.current;
     if (!element) return;

@@ -19,4 +19,6 @@ export interface GlobeDragController {
   leave: () => void;
   /** Advances inertia and auto-rotation by `deltaSeconds`; returns the target rotation. */
   step: (deltaSeconds: number) => GlobeRotation;
+  /** The current rotation, without the tilt towards the pointer. */
+  rotation: () => GlobeRotation;
 }

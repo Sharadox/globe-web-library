@@ -8,3 +8,4 @@
 - /world <World> scene for custom Canvas; /color globeColors(palette)
 - CSS vars: --globe-glow, --globe-surface
 - Peer: react, react-dom. License: Sharadox Open Source License 0.1.0
+- Continuity on a soft navigation (web-library isSoftNavigation, e.g. a language switch): the new globe carries on from the previous rotation (controller.rotation()), starts exactly there (no swing-in), and land dots are cached per address

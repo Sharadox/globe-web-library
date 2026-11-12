@@ -1,6 +1,7 @@
 "use client";
 import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
+import { isSoftNavigation } from "@sharadox/web-library/navigation/soft-navigation";
 import { AdditiveBlending, BackSide, MathUtils, NormalBlending, ShaderMaterial, type Group } from "three";
 import { Arc } from "@sharadox/globe-web-library/arc";
 import { Dots } from "@sharadox/globe-web-library/dots";
@@ -12,12 +13,17 @@ import type { WorldProperties } from "@sharadox/globe-web-library/world/type";
 /** The planet scene: body, atmosphere, land dots, arcs from home and markers. Rotation comes from the drag controller. */
 export function World({ data, drag, colors, home, destinations }: WorldProperties) {
   const group = useRef<Group>(null);
+  // After a soft navigation the planet starts exactly where it was; on a first visit it swings into place.
+  const [settled] = useState(isSoftNavigation);
+  const placed = useRef(false);
   useFrame((_, deltaSeconds) => {
     const planet = group.current;
     if (!planet) return;
     const target = drag.step(deltaSeconds);
-    planet.rotation.y = MathUtils.damp(planet.rotation.y, target.y, 6, deltaSeconds);
-    planet.rotation.x = MathUtils.damp(planet.rotation.x, target.x, 6, deltaSeconds);
+    const snap = settled && !placed.current;
+    placed.current = true;
+    planet.rotation.y = snap ? target.y : MathUtils.damp(planet.rotation.y, target.y, 6, deltaSeconds);
+    planet.rotation.x = snap ? target.x : MathUtils.damp(planet.rotation.x, target.x, 6, deltaSeconds);
   });
   const body = useMemo(
     () =>
