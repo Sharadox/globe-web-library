@@ -1,6 +1,7 @@
 // @vitest-environment happy-dom
 import { render } from "@testing-library/react";
 import { beforeEach, expect, test, vi } from "vitest";
+import { beginSoftNavigation } from "@sharadox/web-library/navigation/soft-navigation";
 import { frames } from "@sharadox/globe-web-library/test-fixture/three-fiber";
 
 vi.mock("@react-three/fiber", () => import("@sharadox/globe-web-library/test-fixture/three-fiber"));
@@ -37,6 +38,25 @@ test.each([true, false])("renders the planet, dots, arcs and markers, and animat
     Object.assign(mesh, { scale: { setScalar: vi.fn() }, material: { opacity: 1 } });
   for (const frame of frames) frame({ clock: { elapsedTime: 1 } }, 0.016);
   expect(group.rotation.y).not.toBe(0);
+});
+
+test("after a soft navigation the planet starts exactly at its rotation", () => {
+  beginSoftNavigation();
+  const drag = createDragController({ x: 0.4, y: 1.2 }, false);
+  const { container } = render(
+    <World data={new Float32Array()} drag={drag} colors={colorsFor(true)} home={home} destinations={[]} />,
+  );
+  beginSoftNavigation(0);
+  const group = container.querySelector("group") as unknown as { rotation: { x: number; y: number } };
+  Object.assign(group, { rotation: { x: 0, y: 0 } });
+  for (const material of container.querySelectorAll("shadermaterial"))
+    Object.assign(material, { uniforms: { time: { value: 0 } } });
+  for (const mesh of container.querySelectorAll("mesh"))
+    Object.assign(mesh, { scale: { setScalar: vi.fn() }, material: { opacity: 1 } });
+  for (const frame of frames) frame({ clock: { elapsedTime: 1 } }, 0.016);
+  expect(group.rotation).toEqual({ x: 0.4, y: 1.2 });
+  for (const frame of frames) frame({ clock: { elapsedTime: 1 } }, 0.016);
+  expect(group.rotation).toEqual({ x: 0.4, y: 1.2 });
 });
 
 test("frames do nothing once the scene is gone", () => {
