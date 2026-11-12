@@ -12,8 +12,11 @@ describe("createDragController", () => {
     expect(later - early).toBeGreaterThan(early);
   });
 
-  test("stays still without auto-rotation", () => {
-    expect(createDragController({ x: 0.2, y: 0.3 }, false).step(1)).toEqual({ x: 0.2, y: 0.3 });
+  test("stays still without auto-rotation, and reports its rotation without the tilt", () => {
+    const controller = createDragController({ x: 0.2, y: 0.3 }, false);
+    expect(controller.step(1)).toEqual({ x: 0.2, y: 0.3 });
+    controller.move({ clientX: 260, clientY: 260, bounds });
+    expect(controller.rotation()).toEqual({ x: 0.2, y: 0.3 });
   });
 
   test("tilts towards the pointer and back when it leaves", () => {

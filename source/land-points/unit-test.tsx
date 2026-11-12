@@ -14,6 +14,16 @@ test("loads the dots, null until then", async () => {
   expect(fetch).toHaveBeenCalledWith("/dots.bin");
 });
 
+test("loads each address once, so a globe mounted again draws at once", async () => {
+  const fetch = vi.fn(async () => ({ arrayBuffer: async () => new Float32Array([3]).buffer }));
+  vi.stubGlobal("fetch", fetch);
+  const first = renderHook(() => useLandPoints("/once.bin"));
+  await waitFor(() => expect(first.result.current).not.toBeNull());
+  const second = renderHook(() => useLandPoints("/once.bin"));
+  expect(Array.from(second.result.current ?? [])).toEqual([3]);
+  expect(fetch).toHaveBeenCalledOnce();
+});
+
 test("ignores an answer that arrives after unmounting, and has a default address", async () => {
   let finish: (value: unknown) => void = () => {};
   const fetch = vi.fn(() => new Promise((resolve) => (finish = resolve)));

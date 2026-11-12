@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import { useEffect } from "react";
 import { afterEach, expect, test, vi } from "vitest";
 import { useGlobeDrag } from "@sharadox/globe-web-library/globe-drag";
+import { beginSoftNavigation } from "@sharadox/web-library/navigation/soft-navigation";
 
 const controllers: ReturnType<typeof useGlobeDrag>[1][] = [];
 function Surface() {
@@ -34,6 +35,21 @@ test("drives the controller from pointer events, with grab cursors and pointer c
   pointer(surface, "pointercancel");
   pointer(surface, "pointerleave");
   unmount();
+});
+
+test("a globe mounted by a soft navigation carries on from the last one's rotation", () => {
+  const { unmount } = render(<Surface />);
+  const first = controllers.at(-1)!;
+  first.down(0, 0);
+  first.move({ clientX: 80, clientY: 0, bounds: { left: 0, top: 0, width: 100, height: 100 } });
+  const where = first.rotation();
+  unmount();
+  beginSoftNavigation();
+  render(<Surface />);
+  expect(controllers.at(-1)!.rotation()).toEqual(where);
+  beginSoftNavigation(0);
+  render(<Surface />);
+  expect(controllers.at(-1)!.rotation()).toEqual({ x: 0, y: 0 });
 });
 
 test("does nothing until the reference is attached", () => {
