@@ -1,6 +1,6 @@
 {
   "name": "@sharadox/globe-web-library",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "An interactive 3D dot globe for React (three.js): land dots, arcs with traveling pulses, markers, drag with inertia, auto-rotation, colors from the page, plus the land dots generator.",
   "private": false,
   "license": "SEE LICENSE IN LICENCA.md",
@@ -25,7 +25,8 @@
     "LICENCA.md",
     "LICENSE.md",
     "NOTICE.md",
-    "llms.txt"
+    "llms.txt",
+    "CHANGELOG.md"
   ],
   "sideEffects": [
     "**/*.css"
@@ -65,6 +66,7 @@
     "@sharadox/es-lint-configuration-web-library": "^0.1.1",
     "@sharadox/library-build-web-library": "^0.1.1",
     "@sharadox/prettier-configuration-web-library": "^0.1.0",
+    "@sharadox/test-web-library": "^0.4.0",
     "@sharadox/turborepo-configuration-web-library": "^0.1.0",
     "@sharadox/type-script-configuration-web-library": "^0.2.0",
     "@sharadox/vitest-configuration-web-library": "^0.1.2",
@@ -92,7 +94,7 @@
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.2",
-    "@sharadox/web-library": "^0.8.0",
+    "@sharadox/web-library": "^0.9.0",
     "d3-geo": "^3.1.2",
     "three": "^0.180.0",
     "topojson-client": "^3.1.0",

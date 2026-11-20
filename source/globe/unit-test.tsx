@@ -2,10 +2,10 @@
 import { act, render, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, expect, test, vi } from "vitest";
 
-vi.mock("@react-three/fiber", () => import("@sharadox/globe-web-library/test-fixture/three-fiber"));
+vi.mock("@react-three/fiber", () => import("@sharadox/test-web-library/three-fiber"));
 vi.mock("@sharadox/globe-web-library/web-gl-support", () => ({ supportsWebGl: vi.fn(() => true) }));
 const { Globe } = await import("@sharadox/globe-web-library/globe");
-const { Canvas } = await import("@sharadox/globe-web-library/test-fixture/three-fiber");
+const { Canvas } = await import("@sharadox/test-web-library/three-fiber");
 const { supportsWebGl } = await import("@sharadox/globe-web-library/web-gl-support");
 
 let visibility: (entries: { isIntersecting: boolean }[]) => void = () => {};
