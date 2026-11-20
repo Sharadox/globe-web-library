@@ -2,9 +2,9 @@
 import { render } from "@testing-library/react";
 import { beforeEach, expect, test, vi } from "vitest";
 import { beginSoftNavigation } from "@sharadox/web-library/navigation/soft-navigation";
-import { frames } from "@sharadox/globe-web-library/test-fixture/three-fiber";
+import { frames } from "@sharadox/test-web-library/three-fiber";
 
-vi.mock("@react-three/fiber", () => import("@sharadox/globe-web-library/test-fixture/three-fiber"));
+vi.mock("@react-three/fiber", () => import("@sharadox/test-web-library/three-fiber"));
 const { World } = await import("@sharadox/globe-web-library/world");
 const { globeColors } = await import("@sharadox/globe-web-library/color");
 const { createDragController } = await import("@sharadox/globe-web-library/drag-controller");

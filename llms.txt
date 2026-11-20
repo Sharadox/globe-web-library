@@ -9,3 +9,10 @@
 - CSS vars: --globe-glow, --globe-surface
 - Peer: react, react-dom. License: Sharadox Open Source License 0.1.0
 - Continuity on a soft navigation (web-library isSoftNavigation, e.g. a language switch): the new globe carries on from the previous rotation (controller.rotation()), starts exactly there (no swing-in), and land dots are cached per address
+- /arc: Arc: a light arc between two places with a pulse along it
+- /hex-channel: hexChannel("#rrggbb") → [red, green, blue] from 0 to 1, for shader colors
+- /land-point-generator: landPoints(topology, options): evenly spaced dots on land (Fibonacci lattice), Antarctica left out below southernLimit
+- /web-gl-support: supportsWebGl(): whether the browser can create a WebGL context
+- /latitude-longitude-to-vector: latitudeLongitudeToVector(latitude, longitude, radius): a point on the sphere (longitude 0 faces the camera)
+- /marker: Marker: a city dot lying flat on the surface
+- /shader/arc: ARC_SHADER, and shader/dot, shader/atmosphere, shader/glow-vertex, shader/body: the globe's GLSL shaders

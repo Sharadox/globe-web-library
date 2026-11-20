@@ -52,6 +52,13 @@ The globe fills its positioned parent. Its halo and fallback follow `--globe-glo
 | `…/color`                                                             | `globeColors({ ink, body, rim, dark })`                                            |
 | `…/latitude-longitude-to-vector`, `…/hex-channel`, `…/web-gl-support` | Helpers                                                                            |
 
+### Also exported
+
+Smaller parts, mostly building blocks of the main exports:
+
+- `…/arc`: Arc: a light arc between two places with a pulse along it
+- `…/shader/arc`: ARC_SHADER, and shader/dot, shader/atmosphere, shader/glow-vertex, shader/body: the globe's GLSL shaders
+
 ## Develop
 
 Tests replace the three.js renderer with a stand-in and run every frame callback by hand. `pnpm verify` runs formatting, lint, type-check, tests with 100% coverage and the build. Branches follow `<feature>.development` → `development` → `index`, and releases are `v<version>` tags on `index`.
